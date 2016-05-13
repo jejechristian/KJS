@@ -1,3 +1,5 @@
 # KJS
 
-Kevin, Jeremia, Sandra BrokenBone Detection
+Project: BrokenBone Detection
+
+pengurus: Kevin, Jeremia, Sandra
