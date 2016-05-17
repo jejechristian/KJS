@@ -1,0 +1,70 @@
+<html>
+        <head>
+                <title>Falling Ball</title>
+                <style>canvas { width: 100%; height: 100% }</style>
+        </head>
+        <body>
+                <script src="three.js"></script>
+                <script>
+                        // create scene and camera
+                        var scene = new THREE.Scene();
+                        var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+
+                        // create a renderer, set its size, append it to the document.
+                        var renderer = new THREE.WebGLRenderer();
+                        renderer.setSize(window.innerWidth, window.innerHeight);
+                        document.body.appendChild(renderer.domElement);
+
+                        
+                        camera.position.z = 5;
+                       //sphere
+                        var spheregeometry = new THREE.SphereGeometry(0.2, 16, 16);
+                        var spherematerial = new THREE.MeshBasicMaterial({wireframe: true, color: 0x000000});
+                        var sphere = new THREE.Mesh(spheregeometry, spherematerial);
+                        
+                        //sphere position
+                        sphere.position.x = 0.0;
+						sphere.position.y = +3.0;
+						sphere.position.z = 0.0;
+						sphere.position.set(0.0, +3, 0);
+                        
+                        // Now, add the sphere to the scene.
+                        scene.add(sphere);
+						
+						var speed =0.1;
+						var flag = 0;
+						var yMax = +3.0;
+						var dT = 0;
+						
+                        // The render loop that makes things visible and also contains the code for the rotational motion of the shapes.
+                        var render = function () {
+                                requestAnimationFrame(render);
+								
+								if(flag == 0)
+								{
+									if(sphere.position.y <= +yMax){
+									sphere.translateY(-speed);
+									}
+									if(sphere.position.y <= -3.0)
+									{
+										flag = 1;
+										dT += 1;
+									}
+								}
+								
+								if(flag == 1)
+								{
+									sphere.translateY(+speed);
+									if(sphere.position.y >= +yMax  - (0.98*dT)){
+									flag = 0;
+									}
+								}
+								
+                                renderer.render(scene, camera);
+                        };
+
+                        // Calling the render function
+                        render();
+                </script>
+        </body>
+</html>
